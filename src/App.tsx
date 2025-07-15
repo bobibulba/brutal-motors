@@ -6,6 +6,9 @@ import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Inventory from './pages/Inventory';
+import CarDetails from './pages/CarDetails';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/inventory" element={<Inventory />} />
+              <Route path="/car/:id" element={<CarDetails />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
           <Footer />
