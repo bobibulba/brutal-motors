@@ -22,6 +22,15 @@ export interface User {
   isAdmin: boolean;
 }
 
+export interface Profile {
+  id: string;
+  name: string;
+  phone: string | null;
+  is_admin: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Appointment {
   id: string;
   userId: string;
@@ -35,10 +44,9 @@ export interface Appointment {
 
 export interface AuthContextType {
   user: User | null;
+  profile: Profile | null;
   login: (email: string, password: string) => Promise<boolean>;
-  loginWithGoogle: () => Promise<boolean>;
-  loginWithPhone: (phone: string, code: string) => Promise<boolean>;
-  register: (userData: Omit<User, 'id' | 'isAdmin'> & { password: string }) => Promise<boolean>;
+  register: (userData: { name: string; email: string; phone: string; password: string }) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
 }
