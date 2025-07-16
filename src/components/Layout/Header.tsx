@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Car, User, LogOut, Menu, X } from 'lucide-react';
+import { Car, User, LogOut, Menu, X, Settings } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useProfile } from '../../hooks/useProfile';
 import { useState } from 'react';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useProfile();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,6 +40,12 @@ const Header: React.FC = () => {
             <Link to="/contact" className="hover:text-red-400 transition-colors">
               Contact
             </Link>
+            {isAdmin && (
+              <Link to="/admin" className="hover:text-red-400 transition-colors flex items-center space-x-1">
+                <Settings className="h-4 w-4" />
+                <span>Admin</span>
+              </Link>
+            )}
           </nav>
 
           {/* Auth Section */}
@@ -47,6 +55,9 @@ const Header: React.FC = () => {
                 <div className="flex items-center space-x-2">
                   <User className="h-5 w-5" />
                   <span className="text-sm">{user.email}</span>
+                  {isAdmin && (
+                    <span className="bg-red-600 text-xs px-2 py-1 rounded-full">Admin</span>
+                  )}
                 </div>
                 <button
                   onClick={handleSignOut}
@@ -107,11 +118,24 @@ const Header: React.FC = () => {
               >
                 Contact
               </Link>
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className="hover:text-red-400 transition-colors flex items-center space-x-1"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Settings className="h-4 w-4" />
+                  <span>Admin Panel</span>
+                </Link>
+              )}
               {user ? (
                 <div className="pt-4 border-t border-gray-800">
                   <div className="flex items-center space-x-2 mb-4">
                     <User className="h-5 w-5" />
                     <span className="text-sm">{user.email}</span>
+                    {isAdmin && (
+                      <span className="bg-red-600 text-xs px-2 py-1 rounded-full">Admin</span>
+                    )}
                   </div>
                   <button
                     onClick={handleSignOut}
