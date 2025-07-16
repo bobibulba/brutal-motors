@@ -3,77 +3,56 @@ import { Car, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-white border-t-4 border-white">
+    <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo and Description */}
-          <div className="md:col-span-2">
+          {/* Brand */}
+          <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-brutal-yellow p-2 border-2 border-white shadow-brutal">
-                <Car className="h-6 w-6 text-black" />
-              </div>
-              <div className="font-mono font-black text-xl text-white tracking-wider">
-                BRUTAL<span className="text-brutal-yellow">MOTORS</span>
-              </div>
+              <Car className="h-8 w-8 text-red-600" />
+              <span className="text-2xl font-bold">BRUTAL MOTORS</span>
             </div>
-            <p className="font-mono text-gray-300 mb-4 max-w-md">
-              THE MOST AGGRESSIVE CAR DEALERSHIP IN THE CITY. WE DON'T JUST SELL CARS, WE DELIVER EXPERIENCES THAT HIT DIFFERENT.
+            <p className="text-gray-400 mb-4">
+              Premium car dealership specializing in high-performance vehicles. 
+              We deliver excellence in every transaction with unmatched service and quality.
             </p>
-            <div className="flex space-x-4">
-              <div className="bg-brutal-pink p-2 border-2 border-white shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 cursor-pointer">
-                <div className="w-6 h-6 bg-black"></div>
-              </div>
-              <div className="bg-brutal-cyan p-2 border-2 border-white shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 cursor-pointer">
-                <div className="w-6 h-6 bg-black"></div>
-              </div>
-              <div className="bg-brutal-green p-2 border-2 border-white shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 cursor-pointer">
-                <div className="w-6 h-6 bg-black"></div>
-              </div>
-            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-mono font-black text-lg mb-4 text-brutal-yellow">QUICK LINKS</h3>
-            <ul className="space-y-2 font-mono">
-              <li><a href="/inventory" className="hover:text-brutal-yellow transition-colors">INVENTORY</a></li>
-              <li><a href="/about" className="hover:text-brutal-yellow transition-colors">ABOUT US</a></li>
-              <li><a href="/contact" className="hover:text-brutal-yellow transition-colors">CONTACT</a></li>
-              <li><a href="/auth" className="hover:text-brutal-yellow transition-colors">LOGIN</a></li>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li><a href="/inventory" className="text-gray-400 hover:text-white transition-colors">Inventory</a></li>
+              <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/auth" className="text-gray-400 hover:text-white transition-colors">Account</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-mono font-black text-lg mb-4 text-brutal-yellow">CONTACT INFO</h3>
-            <div className="space-y-3 font-mono text-sm">
+            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-brutal-cyan" />
-                <span>+1 (555) BRUTAL-1</span>
+                <Phone className="h-4 w-4 text-red-600" />
+                <span className="text-gray-400">(555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-brutal-pink" />
-                <span>INFO@BRUTALMOTORS.COM</span>
+                <Mail className="h-4 w-4 text-red-600" />
+                <span className="text-gray-400">info@brutalmotors.com</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-brutal-green" />
-                <span>123 BRUTAL ST, CITY</span>
+                <MapPin className="h-4 w-4 text-red-600" />
+                <span className="text-gray-400">123 Motor Ave, City, ST 12345</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t-2 border-white mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="font-mono text-gray-400 text-sm">
-              © 2024 BRUTAL MOTORS. ALL RIGHTS RESERVED.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0 font-mono text-sm">
-              <a href="#" className="hover:text-brutal-yellow transition-colors">PRIVACY POLICY</a>
-              <a href="#" className="hover:text-brutal-yellow transition-colors">TERMS OF SERVICE</a>
-              <a href="#" className="hover:text-brutal-yellow transition-colors">GDPR COMPLIANCE</a>
-            </div>
-          </div>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p className="text-gray-400">
+            © 2024 Brutal Motors. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

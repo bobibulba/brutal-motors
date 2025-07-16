@@ -1,398 +1,290 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar, Wrench, DollarSign, FileText, CheckCircle, AlertCircle } from 'lucide-react';
-import Card from '../components/UI/Card';
-import Button from '../components/UI/Button';
-import Input from '../components/UI/Input';
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: 'general',
-    message: '',
-    preferredContact: 'email',
-    urgency: 'normal'
+    subject: '',
+    message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: 'SHOWROOM ADDRESS',
-      details: [
-        '1234 Performance Drive',
-        'Motor City, MC 12345',
-        'United States'
-      ]
-    },
-    {
-      icon: Phone,
-      title: 'PHONE NUMBERS',
-      details: [
-        'Sales: (555) 123-CARS',
-        'Service: (555) 123-SERV',
-        'Parts: (555) 123-PART'
-      ]
-    },
-    {
-      icon: Mail,
-      title: 'EMAIL ADDRESSES',
-      details: [
-        'sales@brutalmotors.com',
-        'service@brutalmotors.com',
-        'info@brutalmotors.com'
-      ]
-    },
-    {
-      icon: Clock,
-      title: 'BUSINESS HOURS',
-      details: [
-        'Mon-Fri: 9:00 AM - 8:00 PM',
-        'Saturday: 9:00 AM - 6:00 PM',
-        'Sunday: 12:00 PM - 5:00 PM'
-      ]
-    }
-  ];
-
-  const departments = [
-    {
-      icon: MessageSquare,
-      title: 'GENERAL INQUIRIES',
-      description: 'Questions about our dealership, inventory, or services',
-      contact: 'info@brutalmotors.com',
-      phone: '(555) 123-INFO'
-    },
-    {
-      icon: Calendar,
-      title: 'SALES DEPARTMENT',
-      description: 'Vehicle purchases, test drives, and sales consultations',
-      contact: 'sales@brutalmotors.com',
-      phone: '(555) 123-CARS'
-    },
-    {
-      icon: Wrench,
-      title: 'SERVICE CENTER',
-      description: 'Maintenance, repairs, and technical support',
-      contact: 'service@brutalmotors.com',
-      phone: '(555) 123-SERV'
-    },
-    {
-      icon: DollarSign,
-      title: 'FINANCING',
-      description: 'Loan applications, lease options, and payment plans',
-      contact: 'finance@brutalmotors.com',
-      phone: '(555) 123-LOAN'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'What financing options do you offer?',
-      answer: 'We offer competitive financing through multiple lenders, including traditional auto loans, lease programs, and special financing for qualified buyers. Our finance team works with all credit levels.'
-    },
-    {
-      question: 'Do you accept trade-ins?',
-      answer: 'Yes! We accept trade-ins and offer competitive valuations. Our team can provide an instant quote and handle all paperwork to make the process seamless.'
-    },
-    {
-      question: 'What warranty comes with your vehicles?',
-      answer: 'All our vehicles come with comprehensive warranties. New cars include manufacturer warranties, while pre-owned vehicles come with our exclusive Brutal Motors warranty covering major components.'
-    },
-    {
-      question: 'Can I schedule a test drive online?',
-      answer: 'Absolutely! You can schedule test drives through our website or by calling our sales team. We offer flexible scheduling including evenings and weekends.'
-    },
-    {
-      question: 'Do you offer vehicle delivery?',
-      answer: 'Yes, we offer complimentary delivery within 50 miles of our dealership. For longer distances, we can arrange transportation at competitive rates.'
-    }
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: 'general',
-        message: '',
-        preferredContact: 'email',
-        urgency: 'normal'
-      });
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 5000);
-    }
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+    alert('Thank you for your message! We\'ll get back to you soon.');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    });
   };
 
   return (
-    <div className="min-h-screen bg-brutal-pink">
-      {/* Hero Section */}
-      <div className="bg-white border-b-4 border-black">
-        <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-          <h1 className="text-6xl font-bold mb-6">GET IN TOUCH</h1>
-          <p className="text-2xl max-w-4xl mx-auto">
-            READY TO TALK CARS? WE'RE HERE TO HELP WITH EVERYTHING FROM 
-            VEHICLE SELECTION TO SERVICE APPOINTMENTS.
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto p-4 space-y-12">
-        {/* Contact Information Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {contactInfo.map((info, index) => (
-            <Card key={index} className="p-6 text-center" hover>
-              <info.icon className="h-12 w-12 mx-auto mb-4 text-brutal-green" />
-              <h3 className="text-lg font-bold mb-3">{info.title}</h3>
-              <div className="space-y-1">
-                {info.details.map((detail, idx) => (
-                  <div key={idx} className="text-sm">{detail}</div>
-                ))}
-              </div>
-            </Card>
-          ))}
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+          <p className="text-xl text-gray-600">Get in touch with our team of automotive experts</p>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Form */}
-          <Card className="p-8">
-            <h2 className="text-3xl font-bold mb-6">SEND US A MESSAGE</h2>
-            
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-brutal-green border-2 border-black flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5" />
-                <span className="font-bold">Message sent successfully! We'll get back to you soon.</span>
-              </div>
-            )}
-            
-            {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-500 text-white border-2 border-black flex items-center space-x-3">
-                <AlertCircle className="h-5 w-5" />
-                <span className="font-bold">Error sending message. Please try again.</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input
-                  label="FULL NAME"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-                <Input
-                  label="EMAIL ADDRESS"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <Input
-                label="PHONE NUMBER"
-                name="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
-
-              <div>
-                <label className="block font-bold mb-2">SUBJECT</label>
-                <select
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  className="w-full p-3 border-2 border-black font-mono"
-                  required
-                >
-                  <option value="general">General Inquiry</option>
-                  <option value="sales">Sales Question</option>
-                  <option value="service">Service Appointment</option>
-                  <option value="financing">Financing Options</option>
-                  <option value="trade-in">Trade-in Valuation</option>
-                  <option value="complaint">Complaint or Concern</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-bold mb-2">PREFERRED CONTACT</label>
-                  <select
-                    name="preferredContact"
-                    value={formData.preferredContact}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border-2 border-black font-mono"
-                  >
-                    <option value="email">Email</option>
-                    <option value="phone">Phone</option>
-                    <option value="text">Text Message</option>
-                  </select>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Contact Information */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+              
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <MapPin className="h-6 w-6 text-red-600 mt-1 mr-4" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Address</h3>
+                    <p className="text-gray-600">
+                      123 Motor Avenue<br />
+                      Luxury District<br />
+                      City, ST 12345
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <label className="block font-bold mb-2">URGENCY</label>
-                  <select
-                    name="urgency"
-                    value={formData.urgency}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border-2 border-black font-mono"
-                  >
-                    <option value="low">Low - Within a week</option>
-                    <option value="normal">Normal - Within 2-3 days</option>
-                    <option value="high">High - Within 24 hours</option>
-                    <option value="urgent">Urgent - Same day</option>
-                  </select>
+
+                <div className="flex items-start">
+                  <Phone className="h-6 w-6 text-red-600 mt-1 mr-4" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Phone</h3>
+                    <p className="text-gray-600">(555) 123-4567</p>
+                    <p className="text-gray-600">Toll Free: (800) 555-CARS</p>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block font-bold mb-2">MESSAGE</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={6}
-                  className="w-full p-3 border-2 border-black font-mono resize-none"
-                  placeholder="Tell us how we can help you..."
-                  required
-                />
-              </div>
+                <div className="flex items-start">
+                  <Mail className="h-6 w-6 text-red-600 mt-1 mr-4" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Email</h3>
+                    <p className="text-gray-600">info@brutalmotors.com</p>
+                    <p className="text-gray-600">sales@brutalmotors.com</p>
+                  </div>
+                </div>
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="w-full"
-                disabled={isSubmitting}
-                icon={Send}
-              >
-                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
-              </Button>
-            </form>
-          </Card>
-
-          {/* Departments & Quick Actions */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <h3 className="text-2xl font-bold mb-6">DEPARTMENTS</h3>
-              <div className="space-y-4">
-                {departments.map((dept, index) => (
-                  <div key={index} className="border-b-2 border-gray-200 pb-4 last:border-b-0">
-                    <div className="flex items-start space-x-3">
-                      <dept.icon className="h-6 w-6 mt-1 text-brutal-green" />
-                      <div className="flex-1">
-                        <h4 className="font-bold mb-1">{dept.title}</h4>
-                        <p className="text-sm text-gray-600 mb-2">{dept.description}</p>
-                        <div className="space-y-1">
-                          <div className="flex items-center space-x-2">
-                            <Mail className="h-4 w-4" />
-                            <span className="text-sm">{dept.contact}</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <Phone className="h-4 w-4" />
-                            <span className="text-sm">{dept.phone}</span>
-                          </div>
-                        </div>
-                      </div>
+                <div className="flex items-start">
+                  <Clock className="h-6 w-6 text-red-600 mt-1 mr-4" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Hours</h3>
+                    <div className="text-gray-600">
+                      <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                      <p>Saturday: 9:00 AM - 6:00 PM</p>
+                      <p>Sunday: 11:00 AM - 5:00 PM</p>
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </Card>
 
-            <Card className="p-6">
-              <h3 className="text-2xl font-bold mb-6">QUICK ACTIONS</h3>
-              <div className="space-y-3">
-                <Button variant="primary" className="w-full">
-                  SCHEDULE TEST DRIVE
-                </Button>
-                <Button variant="secondary" className="w-full">
-                  GET TRADE-IN VALUE
-                </Button>
-                <Button variant="secondary" className="w-full">
-                  SERVICE APPOINTMENT
-                </Button>
-                <Button variant="secondary" className="w-full">
-                  FINANCING PRE-APPROVAL
-                </Button>
+              {/* Quick Actions */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <h3 className="font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                <div className="space-y-3">
+                  <a
+                    href="tel:+15551234567"
+                    className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors inline-block text-center"
+                  >
+                    Call Now
+                  </a>
+                  <a
+                    href="/inventory"
+                    className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-lg transition-colors inline-block text-center"
+                  >
+                    View Inventory
+                  </a>
+                </div>
               </div>
-            </Card>
+            </div>
+          </div>
 
-            <Card className="p-6">
-              <h3 className="text-2xl font-bold mb-6">EMERGENCY CONTACT</h3>
-              <p className="mb-4">
-                For urgent matters outside business hours, call our emergency line:
+          {/* Contact Form */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                      Subject *
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="sales">Sales Question</option>
+                      <option value="service">Service Request</option>
+                      <option value="financing">Financing Options</option>
+                      <option value="trade-in">Trade-in Valuation</option>
+                      <option value="appointment">Schedule Appointment</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={6}
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Please provide details about your inquiry..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  ></textarea>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="newsletter"
+                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="newsletter" className="ml-2 text-sm text-gray-600">
+                    I would like to receive updates about new inventory and special offers
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors flex items-center justify-center"
+                >
+                  <Send className="h-5 w-5 mr-2" />
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {/* Map Section */}
+        <div className="mt-16">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="p-6 border-b border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900">Visit Our Showroom</h2>
+              <p className="text-gray-600 mt-2">
+                Experience our premium collection in person at our state-of-the-art facility
               </p>
-              <div className="text-2xl font-bold text-red-600 mb-4">
-                (555) 911-AUTO
+            </div>
+            <div className="h-96 bg-gray-300 flex items-center justify-center">
+              <div className="text-center text-gray-600">
+                <MapPin className="h-12 w-12 mx-auto mb-4" />
+                <p className="text-lg font-medium">Interactive Map</p>
+                <p className="text-sm">123 Motor Avenue, Luxury District, City, ST 12345</p>
               </div>
-              <p className="text-sm text-gray-600">
-                Available 24/7 for roadside assistance, service emergencies, and urgent sales matters.
-              </p>
-            </Card>
+            </div>
           </div>
         </div>
 
         {/* FAQ Section */}
-        <Card className="p-8">
-          <h2 className="text-3xl font-bold mb-8 text-center">FREQUENTLY ASKED QUESTIONS</h2>
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b-2 border-gray-200 pb-6 last:border-b-0">
-                <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-                <p className="text-gray-700">{faq.answer}</p>
+        <div className="mt-16">
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">Do you offer financing options?</h3>
+                <p className="text-gray-600">
+                  Yes, we work with multiple lenders to provide competitive financing options for qualified buyers. 
+                  Our finance team can help you find the best rates and terms for your situation.
+                </p>
               </div>
-            ))}
-          </div>
-        </Card>
 
-        {/* Map Placeholder */}
-        <Card className="p-0 overflow-hidden">
-          <div className="bg-gray-300 h-96 flex items-center justify-center border-b-2 border-black">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-2">INTERACTIVE MAP</h3>
-              <p>1234 Performance Drive, Motor City, MC 12345</p>
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">Can I schedule a test drive?</h3>
+                <p className="text-gray-600">
+                  Absolutely! You can schedule a test drive by calling us, using our online form, or visiting our showroom. 
+                  We recommend scheduling in advance to ensure the vehicle is available.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">Do you accept trade-ins?</h3>
+                <p className="text-gray-600">
+                  Yes, we accept trade-ins and offer competitive valuations. Our team can assess your current vehicle 
+                  and provide a fair market value that can be applied toward your purchase.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">What warranty do you offer?</h3>
+                <p className="text-gray-600">
+                  All our vehicles come with comprehensive warranties. The specific coverage varies by vehicle age, 
+                  mileage, and manufacturer. Our sales team can provide detailed warranty information for each vehicle.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <h4 className="font-bold mb-2">PARKING</h4>
-                <p className="text-sm">Free customer parking available with covered spaces for test drives</p>
-              </div>
-              <div className="text-center">
-                <h4 className="font-bold mb-2">ACCESSIBILITY</h4>
-                <p className="text-sm">Fully wheelchair accessible with dedicated parking spaces</p>
-              </div>
-              <div className="text-center">
-                <h4 className="font-bold mb-2">AMENITIES</h4>
-                <p className="text-sm">Customer lounge, WiFi, refreshments, and children's play area</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

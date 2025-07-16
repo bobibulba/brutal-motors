@@ -1,36 +1,34 @@
 import React from 'react';
-import { Award, Users, Clock, Shield, Star, Target, Heart, Zap, CheckCircle, MapPin, Phone, Mail } from 'lucide-react';
-import Card from '../components/UI/Card';
-import Button from '../components/UI/Button';
+import { Award, Users, Shield, Clock, Target, Heart } from 'lucide-react';
 
 const About: React.FC = () => {
   const stats = [
-    { icon: Users, value: '50,000+', label: 'Happy Customers' },
-    { icon: Clock, value: '25+', label: 'Years Experience' },
-    { icon: Award, value: '500+', label: 'Awards Won' },
-    { icon: Shield, value: '100%', label: 'Satisfaction Rate' }
+    { label: 'Years in Business', value: '25+' },
+    { label: 'Vehicles Sold', value: '10,000+' },
+    { label: 'Satisfied Customers', value: '8,500+' },
+    { label: 'Expert Staff', value: '50+' }
   ];
 
   const values = [
     {
-      icon: Target,
-      title: 'PRECISION',
-      description: 'Every detail matters. From vehicle selection to customer service, we maintain the highest standards of precision and quality.'
-    },
-    {
-      icon: Heart,
-      title: 'PASSION',
-      description: 'We live and breathe automotive excellence. Our passion for cars drives everything we do, from curation to customer care.'
-    },
-    {
       icon: Shield,
-      title: 'TRUST',
-      description: 'Built on decades of honest dealings and transparent processes. Your trust is our most valuable asset.'
+      title: 'Trust & Integrity',
+      description: 'Every transaction is built on honesty and transparency. We provide complete vehicle histories and stand behind our quality guarantee.'
     },
     {
-      icon: Zap,
-      title: 'INNOVATION',
-      description: 'Embracing cutting-edge technology and modern approaches while respecting automotive heritage and craftsmanship.'
+      icon: Award,
+      title: 'Excellence',
+      description: 'We maintain the highest standards in vehicle selection, customer service, and after-sales support to exceed your expectations.'
+    },
+    {
+      icon: Users,
+      title: 'Customer First',
+      description: 'Your satisfaction is our priority. Our dedicated team works tirelessly to ensure you find the perfect vehicle for your needs.'
+    },
+    {
+      icon: Target,
+      title: 'Performance Focus',
+      description: 'Specializing in high-performance and luxury vehicles, we understand what driving enthusiasts truly desire.'
     }
   ];
 
@@ -38,239 +36,171 @@ const About: React.FC = () => {
     {
       name: 'Marcus Rodriguez',
       role: 'Founder & CEO',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop',
-      bio: '25+ years in luxury automotive sales. Former Ferrari and Lamborghini dealer principal.',
-      specialties: ['Exotic Cars', 'Business Strategy', 'Customer Relations']
+      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
+      bio: '25+ years in luxury automotive sales with a passion for connecting customers with their dream cars.'
     },
     {
       name: 'Sarah Chen',
-      role: 'Head of Sales',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b332c1c2?w=300&h=300&fit=crop',
-      bio: 'Expert in luxury vehicle sales with deep knowledge of European and American performance cars.',
-      specialties: ['Luxury Sales', 'Market Analysis', 'Client Advisory']
+      role: 'Sales Director',
+      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
+      bio: 'Expert in high-performance vehicles with extensive knowledge of European and American supercars.'
     },
     {
       name: 'David Thompson',
-      role: 'Master Technician',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop',
-      bio: 'ASE Master Certified with 20+ years experience in high-performance vehicle maintenance.',
-      specialties: ['Performance Tuning', 'Diagnostics', 'Restoration']
-    },
-    {
-      name: 'Elena Vasquez',
-      role: 'Finance Director',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop',
-      bio: 'Specialized in automotive financing with connections to premium lending institutions.',
-      specialties: ['Financing Solutions', 'Lease Programs', 'Insurance']
+      role: 'Service Manager',
+      image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
+      bio: 'Certified master technician ensuring every vehicle meets our rigorous quality standards.'
     }
   ];
 
-  const timeline = [
-    { year: '1998', event: 'Founded as a small family dealership specializing in European imports' },
-    { year: '2003', event: 'Expanded to include American muscle cars and performance vehicles' },
-    { year: '2008', event: 'Opened state-of-the-art service center and customer lounge' },
-    { year: '2012', event: 'Launched online inventory system and virtual showroom tours' },
-    { year: '2018', event: 'Became authorized dealer for multiple luxury brands' },
-    { year: '2023', event: 'Introduced AI-powered vehicle matching and concierge services' }
-  ];
-
-  const certifications = [
-    'Better Business Bureau A+ Rating',
-    'Automotive Service Excellence (ASE) Certified',
-    'National Independent Automobile Dealers Association Member',
-    'Certified Pre-Owned Vehicle Dealer',
-    'Environmental Protection Agency Compliant',
-    'State Licensed Motor Vehicle Dealer'
-  ];
-
   return (
-    <div className="min-h-screen bg-brutal-pink">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="bg-white border-b-4 border-black">
-        <div className="max-w-7xl mx-auto px-4 py-16">
+      <section className="relative py-20 bg-gradient-to-r from-black to-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-6xl font-bold mb-6">ABOUT BRUTAL MOTORS</h1>
-            <p className="text-2xl max-w-4xl mx-auto mb-8">
-              WHERE AUTOMOTIVE PASSION MEETS UNCOMPROMISING EXCELLENCE. 
-              WE DON'T JUST SELL CARS – WE CURATE AUTOMOTIVE DREAMS.
-            </p>
-            <div className="flex justify-center space-x-4">
-              <Button variant="primary" size="lg">OUR STORY</Button>
-              <Button variant="secondary" size="lg">MEET THE TEAM</Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto p-4 space-y-12">
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <Card key={index} className="p-6 text-center" hover>
-              <stat.icon className="h-12 w-12 mx-auto mb-4" />
-              <div className="text-3xl font-bold text-brutal-green mb-2">{stat.value}</div>
-              <div className="font-bold">{stat.label}</div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Mission Statement */}
-        <Card className="p-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-6">OUR MISSION</h2>
-            <p className="text-xl leading-relaxed max-w-4xl mx-auto">
-              To revolutionize the automotive retail experience by combining cutting-edge technology 
-              with old-school craftsmanship and genuine human connection. We believe every car has a 
-              story, and every customer deserves to find their perfect automotive companion through 
-              a process that's transparent, exciting, and utterly unforgettable.
+            <h1 className="text-5xl font-bold mb-6">About Brutal Motors</h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              For over two decades, we've been the premier destination for luxury and high-performance vehicles, 
+              building lasting relationships with automotive enthusiasts worldwide.
             </p>
           </div>
-        </Card>
+        </div>
+      </section>
 
-        {/* Values Section */}
-        <div>
-          <h2 className="text-4xl font-bold text-center mb-8">OUR VALUES</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <Card key={index} className="p-6" hover>
-                <value.icon className="h-12 w-12 mb-4 text-brutal-green" />
-                <h3 className="text-2xl font-bold mb-3">{value.title}</h3>
-                <p className="text-lg">{value.description}</p>
-              </Card>
+      {/* Stats Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl font-bold text-red-600 mb-2">{stat.value}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Team Section */}
-        <div>
-          <h2 className="text-4xl font-bold text-center mb-8">MEET OUR TEAM</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Story Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  Founded in 1999 by automotive enthusiast Marcus Rodriguez, Brutal Motors began as a small 
+                  specialty dealership with a simple mission: to connect passionate drivers with extraordinary vehicles.
+                </p>
+                <p>
+                  What started as a modest showroom has evolved into one of the most respected luxury car dealerships 
+                  in the region. Our commitment to authenticity, quality, and customer satisfaction has earned us 
+                  the trust of collectors, enthusiasts, and everyday drivers alike.
+                </p>
+                <p>
+                  Today, we continue to uphold the same values that founded our company: integrity, excellence, 
+                  and an unwavering passion for automotive perfection. Every vehicle in our inventory is carefully 
+                  selected and thoroughly inspected to meet our exacting standards.
+                </p>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src="https://images.pexels.com/photos/1719648/pexels-photo-1719648.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Luxury car showroom"
+                className="rounded-lg shadow-xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
+            <p className="text-xl text-gray-600">The principles that guide everything we do</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div key={index} className="text-center">
+                <div className="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+            <p className="text-xl text-gray-600">The experts behind your automotive journey</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <Card key={index} className="p-0 overflow-hidden" hover>
+              <div key={index} className="text-center">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-64 object-cover"
+                  className="w-48 h-48 rounded-full mx-auto mb-4 object-cover"
                 />
-                <div className="p-4">
-                  <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <div className="text-brutal-green font-bold mb-3">{member.role}</div>
-                  <p className="text-sm mb-3">{member.bio}</p>
-                  <div className="space-y-1">
-                    {member.specialties.map((specialty, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <Star className="h-3 w-3 text-brutal-yellow" />
-                        <span className="text-xs">{specialty}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
+                <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                <p className="text-red-600 font-medium mb-3">{member.role}</p>
+                <p className="text-gray-600">{member.bio}</p>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Timeline */}
-        <Card className="p-8">
-          <h2 className="text-4xl font-bold text-center mb-8">OUR JOURNEY</h2>
-          <div className="space-y-6">
-            {timeline.map((item, index) => (
-              <div key={index} className="flex items-start space-x-4">
-                <div className="bg-brutal-yellow border-2 border-black px-3 py-1 font-bold text-sm">
-                  {item.year}
-                </div>
-                <div className="flex-1">
-                  <p className="text-lg">{item.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        {/* Certifications */}
-        <Card className="p-8">
-          <h2 className="text-4xl font-bold text-center mb-8">CERTIFICATIONS & MEMBERSHIPS</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {certifications.map((cert, index) => (
-              <div key={index} className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>{cert}</span>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        {/* Location & Contact */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="p-6">
-            <h3 className="text-2xl font-bold mb-4">VISIT OUR SHOWROOM</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5" />
-                <span>1234 Performance Drive, Motor City, MC 12345</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5" />
-                <span>(555) 123-CARS</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5" />
-                <span>info@brutalmotors.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Clock className="h-5 w-5" />
-                <div>
-                  <div>Mon-Fri: 9:00 AM - 8:00 PM</div>
-                  <div>Sat: 9:00 AM - 6:00 PM</div>
-                  <div>Sun: 12:00 PM - 5:00 PM</div>
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-6">
-            <h3 className="text-2xl font-bold mb-4">WHY CHOOSE US?</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>Handpicked premium vehicle selection</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>Comprehensive vehicle history reports</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>Competitive financing options</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>Full-service maintenance facility</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>Lifetime customer support</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-brutal-green" />
-                <span>30-day exchange guarantee</span>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* CTA Section */}
-        <Card className="p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">READY TO FIND YOUR DREAM CAR?</h2>
-          <p className="text-xl mb-6">
-            Experience the Brutal Motors difference. Visit our showroom or browse our inventory online.
+      {/* Mission Section */}
+      <section className="py-20 bg-black text-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <Heart className="h-16 w-16 text-red-600 mx-auto mb-6" />
+          <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
+          <p className="text-xl text-gray-300 leading-relaxed">
+            To provide an exceptional automotive experience by offering the finest selection of luxury and 
+            high-performance vehicles, backed by unparalleled service and expertise. We believe that finding 
+            the perfect car should be as thrilling as driving it.
           </p>
-          <div className="flex justify-center space-x-4">
-            <Button variant="primary" size="lg">VIEW INVENTORY</Button>
-            <Button variant="secondary" size="lg">SCHEDULE VISIT</Button>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Experience the Difference</h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Visit our showroom and discover why thousands of customers trust Brutal Motors 
+            with their automotive dreams.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/inventory"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
+            >
+              View Inventory
+            </a>
+            <a
+              href="/contact"
+              className="border-2 border-gray-900 hover:bg-gray-900 hover:text-white text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
+            >
+              Contact Us
+            </a>
           </div>
-        </Card>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };

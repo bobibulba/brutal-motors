@@ -1,193 +1,128 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Mail, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import Button from '../components/UI/Button';
-import Input from '../components/UI/Input';
-import Card from '../components/UI/Card';
+import { useNavigate } from 'react-router-dom';
+import { Car, Mail, Lock, User } from 'lucide-react';
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-  });
 
-  const { login, register } = useAuth();
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
-
-  const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [field]: e.target.value }));
-    setError('');
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
     setError('');
 
     try {
-      let success = false;
-      
-      if (isLogin) {
-        success = await login(formData.email, formData.password);
-        if (!success) {
-          setError('Invalid email or password');
-        }
-      } else {
-        if (formData.password !== formData.confirmPassword) {
-          setError('Passwords do not match');
-          setIsLoading(false);
-          return;
-        }
-        if (formData.password.length < 6) {
-          setError('Password must be at least 6 characters');
-          setIsLoading(false);
-          return;
-        }
-        success = await register({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          password: formData.password,
-        });
-        if (!success) {
-          setError('Registration failed. Please try again.');
-        }
-      }
+      const { error } = isLogin 
+        ? await signIn(email, password)
+        : await signUp(email, password);
 
-      if (success) {
+      if (error) {
+        setError(error.message);
+      } else {
         navigate('/');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('An unexpected error occurred');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="font-mono font-black text-4xl mb-4 tracking-wider">
-            {isLogin ? 'LOGIN' : 'REGISTER'}
-          </h1>
-          <p className="font-mono text-gray-600">
-            {isLogin ? 'WELCOME BACK TO BRUTAL MOTORS' : 'JOIN THE BRUTAL FAMILY'}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <div className="flex justify-center">
+            <Car className="h-12 w-12 text-red-600" />
+          </div>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            {isLogin ? 'Sign in to your account' : 'Create your account'}
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="font-medium text-red-600 hover:text-red-500"
+            >
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </button>
           </p>
         </div>
 
-        <Card className="p-8">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-100 border-2 border-red-500 text-red-700 px-4 py-3 mb-4 font-mono font-bold">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit}>
-            {!isLogin && (
-              <Input
-                label="Full Name"
-                value={formData.name}
-                onChange={handleInputChange('name')}
-                placeholder="JOHN DOE"
-                required
-              />
-            )}
-            
-            <Input
-              label="Email Address"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange('email')}
-              placeholder="USER@EXAMPLE.COM"
-              required
-            />
-
-            {!isLogin && (
-              <Input
-                label="Phone Number"
-                type="tel"
-                value={formData.phone}
-                onChange={handleInputChange('phone')}
-                placeholder="+1 (555) 123-4567"
-                required
-              />
-            )}
-
-            <div className="relative">
-              <Input
-                label="Password"
-                type={showPassword ? 'text' : 'password'}
-                value={formData.password}
-                onChange={handleInputChange('password')}
-                placeholder="••••••••"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-9 text-gray-500 hover:text-black"
-              >
-                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-              </button>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+                  placeholder="Email address"
+                />
+              </div>
             </div>
 
-            {!isLogin && (
-              <Input
-                label="Confirm Password"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange('confirmPassword')}
-                placeholder="••••••••"
-                required
-              />
-            )}
-
-            <Button
-              type="submit"
-              variant="primary"
-              className="w-full mb-4"
-              disabled={isLoading}
-            >
-              {isLoading ? 'PROCESSING...' : (isLogin ? 'LOGIN' : 'REGISTER')}
-            </Button>
-          </form>
-
-          <div className="text-center">
-            <button
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setError('');
-                setFormData({
-                  name: '',
-                  email: '',
-                  phone: '',
-                  password: '',
-                  confirmPassword: '',
-                });
-              }}
-              className="font-mono text-black hover:text-brutal-yellow transition-colors duration-200"
-            >
-              {isLogin ? "DON'T HAVE AN ACCOUNT? REGISTER" : 'ALREADY HAVE AN ACCOUNT? LOGIN'}
-            </button>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete={isLogin ? 'current-password' : 'new-password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
           </div>
 
-          {isLogin && (
-            <div className="mt-6 p-4 bg-gray-100 border-2 border-gray-300">
-              <p className="font-mono font-bold text-xs mb-2">DEMO ACCOUNT:</p>
-              <p className="font-mono text-xs">Create a new account or use existing credentials</p>
-            </div>
-          )}
-        </Card>
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <User className="h-5 w-5 text-red-500 group-hover:text-red-400" />
+              </span>
+              {loading ? 'Processing...' : (isLogin ? 'Sign in' : 'Sign up')}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
